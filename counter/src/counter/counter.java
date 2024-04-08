@@ -7,6 +7,8 @@ public class counter {
 		this.value = value;
 	}
 	
+	//public synchronized void increment() {}
+	
 	public void increment() {
 		this.value++;
 	}
