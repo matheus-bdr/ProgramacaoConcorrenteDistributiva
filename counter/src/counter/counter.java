@@ -10,6 +10,7 @@ public class counter {
 	public void increment() {
 		this.value++;
 	}
+	
 	public Integer getValue() {
 		return this.value;
 	}

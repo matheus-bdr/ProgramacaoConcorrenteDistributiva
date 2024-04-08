@@ -2,26 +2,35 @@ package counter;
 
 public class Main {
 	public static void main(String[] args) {
-		counter counter = new counter(0);
-		
-		incrementer in1 = new incrementer(counter);
-		incrementer in2 = new incrementer(counter);
-		incrementer in3 = new incrementer(counter);
-		incrementer in4 = new incrementer(counter);
-	
-		in1.start();
-		in2.start();
-		in3.start();
-		in4.start();
-		
-		try{
-				in1.join();
-				in2.join();
-				in3.join();
-				in4.join();
-		}catch(InterrupedExcepcion e) {
-			System.out.println(   "erro ao chamar joins");
+		int numExec = 0;
+		while(true) {
+			counter counter = new counter(0);
+			
+			incrementer inc1 = new incrementer(counter);
+			incrementer inc2 = new incrementer(counter);
+			incrementer inc3 = new incrementer(counter);
+			incrementer inc4 = new incrementer(counter);
+			
+			inc1.start();
+			inc2.start();
+			inc3.start();
+			inc4.start();
+			
+			try {
+				inc1.join();
+				inc2.join();
+				inc3.join();
+				inc4.join();
+			} catch (InterruptedException e) {
+				System.out.println("Erro ao chamar joins...");
+				e.printStackTrace();
+			}
+			numExec++;
+			if(counter.getValue() == 2) {
+				System.out.println("Num. de execuções: " + numExec);
+				System.out.println("Valor final do contador: " + counter.getValue());
+				break;
+			}
 		}
-		
 	}
 }
